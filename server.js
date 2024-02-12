@@ -1,6 +1,7 @@
 const { ApolloServer } = require("apollo-server-express");
 const express = require("express");
 const mongoDB_connect = require("./mongoDB.js");
+const PORT = 4000;
 
 const typeDefs = require("./graphql/typeDefs");
 const Employee_resolvers = require("./graphql/employee_resolvers");
@@ -19,9 +20,9 @@ async function serverStarter() {
     await server_listen.start();
     server_listen.applyMiddleware({ app });
 
-    app.listen({ port: 8001 }, () => {
+    app.listen({ port: process.env.PORT || 4000 }, () => {
       console.log(
-        `Server ready at http://localhost:8001${server_listen.graphqlPath}`
+        `Server ready at http://localhost:4000${server_listen.graphqlPath}`
       );
     });
   } catch (err) {
